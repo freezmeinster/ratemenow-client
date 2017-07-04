@@ -75,7 +75,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/rate_comment"
             android:layout_centerHorizontal="true"
-            android:text="Rate"/>
+            android:onClick="sendRate"
+            android:text="Rate"
+            style="@style/RateButton"/>
 
     </RelativeLayout>
     </ScrollView>

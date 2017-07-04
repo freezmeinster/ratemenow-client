@@ -1,5 +1,6 @@
 package com.oleafs.ratemenow;
 
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,15 +9,21 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
 public class RateActivity extends AppCompatActivity {
 
+    public RatingBar rate_bar;
+    public EditText comment;
+    public RateActivity activity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rate);
+        activity = this;
 
         Place place = (Place) getIntent().getSerializableExtra("place");
 
@@ -29,9 +36,10 @@ public class RateActivity extends AppCompatActivity {
         TextView owner = (TextView) findViewById(R.id.rate_place_owner);
         owner.setText(place.getOwner());
 
-        RatingBar rate_bar = (RatingBar) findViewById(R.id.rate_place);
-        EditText comment = (EditText) findViewById(R.id.rate_comment);
+        rate_bar = (RatingBar) findViewById(R.id.rate_place);
+        comment = (EditText) findViewById(R.id.rate_comment);
         Button button = (Button) findViewById(R.id.rate_button);
+
 
         if(place.getIs_rated()){
             rate_bar.setVisibility(View.INVISIBLE);
@@ -49,5 +57,18 @@ public class RateActivity extends AppCompatActivity {
                 .fitCenter()
                 .into(picture);
 
+    }
+
+    public void sendRate(View v){
+        final int start = (int) rate_bar.getRating();
+        Toast.makeText(activity, "Ini mambu" + Integer.toString(start), Toast.LENGTH_LONG).show();
+    }
+
+    private class SendRateHandler extends AsyncTask<String, Integer, Boolean> {
+
+        @Override
+        protected Boolean doInBackground(String... params) {
+            return null;
+        }
     }
 }
