@@ -1,5 +1,6 @@
 package com.oleafs.ratemenow;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.media.Image;
@@ -21,10 +22,10 @@ import java.util.List;
 
 public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.MyViewHolder> {
 
-    private Context mContext;
+    private Activity mContext;
     private List<Place> placeList;
 
-    public PlaceAdapter(Context mContext, List<Place> placeList) {
+    public PlaceAdapter(Activity mContext, List<Place> placeList) {
         this.mContext = mContext;
         this.placeList = placeList;
     }
@@ -42,7 +43,7 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.MyViewHolder
     }
 
     @Override
-    public void onBindViewHolder(final MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
             final Place place = placeList.get(position);
         holder.name.setText(place.getName());
         holder.owner.setText(place.getOwner());
@@ -51,7 +52,8 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.MyViewHolder
             public void onClick(View view){
                 Intent intent = new Intent(mContext, RateActivity.class);
                 intent.putExtra("place", place);
-                mContext.startActivity(intent);
+                intent.putExtra("obj_id", position);
+                mContext.startActivityForResult(intent, 1);
             }
         });
         String pic_url = mContext.getString(R.string.url)+place.getPicture();

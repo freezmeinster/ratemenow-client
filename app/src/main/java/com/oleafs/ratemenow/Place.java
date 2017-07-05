@@ -46,4 +46,8 @@ public class Place implements Serializable {
     public Boolean getIs_rated(){
         return this.is_rated;
     }
+
+    public void setIsRated(Boolean status){
+        this.is_rated = status;
+    }
 }

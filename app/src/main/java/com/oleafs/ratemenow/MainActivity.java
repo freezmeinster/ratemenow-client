@@ -1,8 +1,12 @@
 package com.oleafs.ratemenow;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Handler;
+import android.os.SystemClock;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +14,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.SwitchCompat;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -17,6 +22,8 @@ import android.widget.ProgressBar;
 import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.oleafs.ratemenow.utils.Config;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,7 +45,19 @@ public class MainActivity extends AppCompatActivity {
     private PlaceAdapter adapter;
     private List<Place> placeList;
     private MainActivity activity;
+    private Config config;
 
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        System.out.println("REQ CODE= " + requestCode + "RESULT_CODE= " + resultCode );
+        if (requestCode == 1) {
+            boolean is_rated = data.getBooleanExtra("is_rated", false);
+            int obj_id = data.getIntExtra("obj_id", 0);
+            placeList.get(obj_id).setIsRated(is_rated);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,13 +67,14 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
         this.activity = this;
+        config = new Config(getApplicationContext());
 
         placeList = new ArrayList<>();
         adapter = new PlaceAdapter(this, placeList);
 
         adapter.clear();
 
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
+        RecyclerView.LayoutManager mLayoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
@@ -64,12 +84,12 @@ public class MainActivity extends AppCompatActivity {
         swipelayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener(){
             @Override
             public void onRefresh(){
-                finish();
-                startActivity(getIntent());
+                adapter.clear();
+                new OkHttpHandler(activity).execute(config.getBaseURL() + "place/");
             }
         });
 
-        new OkHttpHandler(this).execute(getString(R.string.url)+ "/api/place/");
+        new OkHttpHandler(this).execute(config.getBaseURL() + "place/");
 
     }
 
