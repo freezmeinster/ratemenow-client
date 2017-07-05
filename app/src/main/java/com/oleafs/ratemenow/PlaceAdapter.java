@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.oleafs.ratemenow.utils.Config;
 
 import java.util.List;
 
@@ -23,11 +24,13 @@ import java.util.List;
 public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.MyViewHolder> {
 
     private Activity mContext;
+    private Config config;
     private List<Place> placeList;
 
     public PlaceAdapter(Activity mContext, List<Place> placeList) {
         this.mContext = mContext;
         this.placeList = placeList;
+        this.config = new Config(mContext);
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -56,7 +59,8 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.MyViewHolder
                 mContext.startActivityForResult(intent, 1);
             }
         });
-        String pic_url = mContext.getString(R.string.url)+place.getPicture();
+        String pic_url = config.getBaseURL()+place.getPicture();
+        System.out.println("base_url"+pic_url);
         Glide.with(mContext)
                 .load(pic_url)
                 .placeholder(R.drawable.jar_loading)

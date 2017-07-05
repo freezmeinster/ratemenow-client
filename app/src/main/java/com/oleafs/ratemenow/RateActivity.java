@@ -136,7 +136,7 @@ public class RateActivity extends AppCompatActivity {
             progress = new ProgressDialog(this.activity);
             progress.setMessage("Sending your rate, please wait !!");
             progress.setIndeterminate(true);
-            base_url = config.getBaseURL() + "/place/";
+            base_url = config.getApiUrl() + "/place/";
         }
 
 
@@ -160,7 +160,7 @@ public class RateActivity extends AppCompatActivity {
             Request.Builder builder = new Request.Builder();
             builder.url(url)
                     .post(RequestBody.create(JSON, req_json.toString()))
-                    .addHeader("Authorization", "Token " + getString(R.string.token));
+                    .addHeader("Authorization", "Token " + config.getToken());
             Request request = builder.build();
 
             try {

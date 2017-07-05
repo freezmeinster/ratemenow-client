@@ -5,6 +5,8 @@
         <color name="colorPrimaryDark">#E64A19</color>
         <color name="colorPrimaryLight">#FFCCBC</color>
         <color name="colorAccent">#8BC34A</color>
+        <color name="registerColor">#FFCCBC</color>
+        <color name="loginColor">#8BC34A</color>
         <color name="viewBg">#ddebf5</color>
         <color name="album_title">#4c4c4c</color>
     </resources>
