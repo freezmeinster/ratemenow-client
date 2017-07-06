@@ -2,7 +2,7 @@
     <string name="app_name">Rate Me Now</string>
     <string name="token">f3b08b7e332d6109da500a922acfc076f6cea255</string>
     <string name="url">http://ratemenow.o-leafs.com/</string>
-    <string name="base_api_url">api/</string>
+    <string name="base_api_url">/api/</string>
     <string name="rate_hint">Please give your comment here!</string>
     <string name="thanks">Thanks for your rating</string>
     <string name="rate_success">Rate send</string>

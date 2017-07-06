@@ -103,8 +103,8 @@ public class RateActivity extends AppCompatActivity {
         }
 
         ImageView picture = (ImageView) findViewById(R.id.rate_place_picture);
-        String pic_url = getString(R.string.url)+place.getPicture();
-        System.out.println(pic_url);
+        String pic_url = config.getBaseURL()+place.getPicture();
+        System.out.println("pic_url"+pic_url);
         Glide.with(this)
                 .load(pic_url)
                 .placeholder(R.drawable.jar_loading)
@@ -136,7 +136,7 @@ public class RateActivity extends AppCompatActivity {
             progress = new ProgressDialog(this.activity);
             progress.setMessage("Sending your rate, please wait !!");
             progress.setIndeterminate(true);
-            base_url = config.getApiUrl() + "/place/";
+            base_url = config.getApiUrl() + "place/";
         }
 
 

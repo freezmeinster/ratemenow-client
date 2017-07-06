@@ -25,8 +25,8 @@ public class Config {
 
         if (!base_url.equals("")){
             String last_char = String.valueOf(base_url.charAt(base_url.length() - 1));
-            if ( !last_char.equals("/")){
-                return base_url + "/";
+            if ( last_char.equals("/")){
+                return  base_url.substring(0, base_url.length() - 1);
             } else {
                 return base_url;
             }
