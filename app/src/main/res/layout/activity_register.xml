@@ -14,10 +14,22 @@
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         >
+
+        <ImageView
+        android:id="@+id/registration_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/ic_launcher"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+
         <android.support.design.widget.TextInputLayout
             android:id="@+id/register_layout_url"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_below="@id/registration_logo"
+            android:layout_marginTop="24dp">
             <EditText
                 android:id="@+id/register_url"
                 android:layout_width="fill_parent"
@@ -68,5 +80,7 @@
 
 
     </RelativeLayout>
+
+
 
 </android.support.constraint.ConstraintLayout>

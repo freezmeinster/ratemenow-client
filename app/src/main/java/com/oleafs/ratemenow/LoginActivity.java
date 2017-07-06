@@ -74,6 +74,15 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        Button register_button = (Button) findViewById(R.id.register_button);
+        register_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent reg_intent = new Intent(getApplicationContext(), RegisterActivity.class);
+                startActivity(reg_intent);
+            }
+        });
+
     }
 
     public class LoginHandler extends AsyncTask<String, Integer, Integer> {

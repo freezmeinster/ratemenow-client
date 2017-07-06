@@ -7,4 +7,5 @@
     <string name="thanks">Thanks for your rating</string>
     <string name="rate_success">Rate send</string>
     <string name="rate_error">Opps something wrong, try again leter !</string>
+    <string name="invalid_token_message">{\"detail\":\"Invalid token header. No credentials provided.\"}</string>
 </resources>

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.SystemClock;
 import android.provider.Telephony;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.BoringLayout;
@@ -41,6 +42,7 @@ public class RateActivity extends AppCompatActivity {
     public Config config;
     public int obj_id;
     public boolean is_rated;
+    public SwipeRefreshLayout swipelayout;
 
     @Override
     public void onBackPressed() {
@@ -56,6 +58,19 @@ public class RateActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rate);
+
+        swipelayout = (SwipeRefreshLayout) findViewById(R.id.layout_rate);
+        swipelayout.setDistanceToTriggerSync(200);
+        swipelayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener(){
+            @Override
+            public void onRefresh(){
+                finish();
+                overridePendingTransition(0, 0);
+                startActivity(getIntent());
+                overridePendingTransition(0, 0);
+            }
+        });
+
         activity = this;
         config = new Config(getApplicationContext());
 

@@ -66,6 +66,24 @@
         android:layout_below="@+id/login_layout_password"
         android:layout_marginTop="24dp" />
 
+        <TextView
+            android:id="@+id/register_question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="55dp"
+            android:text="Don't have user yet? register here"
+            android:layout_below="@+id/login_button"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:id="@+id/register_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Register"
+            android:background="@color/registerColor"
+            android:layout_below="@+id/register_question"
+            android:layout_marginTop="10dp" />
+
 
     </RelativeLayout>
 

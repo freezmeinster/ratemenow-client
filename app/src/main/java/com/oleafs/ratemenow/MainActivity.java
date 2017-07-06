@@ -165,22 +165,29 @@ public class MainActivity extends AppCompatActivity {
             super.onPostExecute(s);
             placeList.clear();
             if (s != null ) {
-                try {
-                    JSONArray json = new JSONArray(s);
-                    for (int i = 0; i < json.length(); i++) {
-                        JSONObject jo = json.getJSONObject(i);
-                        Place p = new Place(jo.getString("id"),
-                                jo.getString("name"),
-                                jo.getString("description"),
-                                jo.getString("owner"),
-                                jo.getString("picture"),
-                                jo.getBoolean("is_rated"));
-                        placeList.add(p);
-                    }
-
-                } catch (JSONException e) {
-                    Toast toast = Toast.makeText(this.activity, "Error Parsing JSON", Toast.LENGTH_LONG);
+                System.out.println("response-depan" +s);
+                System.out.println("setting-depan"+getString(R.string.invalid_token_message));
+                if (s.equals(getString(R.string.invalid_token_message))) {
+                    Toast toast = Toast.makeText(this.activity, "Session Expire", Toast.LENGTH_LONG);
                     toast.show();
+                } else {
+                    try {
+                        JSONArray json = new JSONArray(s);
+                        for (int i = 0; i < json.length(); i++) {
+                            JSONObject jo = json.getJSONObject(i);
+                            Place p = new Place(jo.getString("id"),
+                                    jo.getString("name"),
+                                    jo.getString("description"),
+                                    jo.getString("owner"),
+                                    jo.getString("picture"),
+                                    jo.getBoolean("is_rated"));
+                            placeList.add(p);
+                        }
+
+                    } catch (JSONException e) {
+                        Toast toast = Toast.makeText(this.activity, "Error Parsing JSON", Toast.LENGTH_LONG);
+                        toast.show();
+                    }
                 }
             } else {
                 Toast toast = Toast.makeText(this.activity, "Connection Lost !!", Toast.LENGTH_LONG);
