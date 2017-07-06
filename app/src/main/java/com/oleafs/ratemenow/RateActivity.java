@@ -173,6 +173,7 @@ public class RateActivity extends AppCompatActivity {
             }
 
             Request.Builder builder = new Request.Builder();
+            System.out.println("TOKEN"+config.getToken());
             builder.url(url)
                     .post(RequestBody.create(JSON, req_json.toString()))
                     .addHeader("Authorization", "Token " + config.getToken());
@@ -182,6 +183,7 @@ public class RateActivity extends AppCompatActivity {
                 Response response = client.newCall(request).execute();
                 try {
                     JSONObject json_resp = new JSONObject(response.body().string());
+                    System.out.println("RATE_RESPONSE"+json_resp);
                     if (json_resp.getString("status").equals("success")){
                         is_rated = true;
                         return true;

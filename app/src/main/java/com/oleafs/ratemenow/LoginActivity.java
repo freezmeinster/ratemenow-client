@@ -98,6 +98,8 @@ public class LoginActivity extends AppCompatActivity {
             this.activity = activity;
             progress = new ProgressDialog(activity);
             progress.setIndeterminate(false);
+            progress.setCancelable(false);
+            progress.setCanceledOnTouchOutside(false);
             progress.setMessage("Try login, please wait !!");
         }
 

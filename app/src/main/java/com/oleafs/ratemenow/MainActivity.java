@@ -142,6 +142,8 @@ public class MainActivity extends AppCompatActivity {
             progress = new ProgressDialog(this.activity);
             progress.setMessage("Fetching Place, Please Wait !!!");
             progress.setIndeterminate(false);
+            progress.setCancelable(false);
+            progress.setCanceledOnTouchOutside(false);
         }
 
         protected  void onPreExecute(){
